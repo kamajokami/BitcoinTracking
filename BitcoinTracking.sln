@@ -1,0 +1,63 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36908.2
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitcoinTracking.API", "src\BitcoinTracking.API\BitcoinTracking.API.csproj", "{E6118529-243F-40FD-B322-2BFC6796B0FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitcoinTracking.Web", "src\BitcoinTracking.Web\BitcoinTracking.Web.csproj", "{70B7A56F-7C33-4B4D-BE04-EA84CABB645A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitcoinTracking.BAL", "src\BitcoinTracking.BAL\BitcoinTracking.BAL.csproj", "{0C2A38E9-7F63-40C6-9A54-4E90E516459A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitcoinTracking.DAL", "src\BitcoinTracking.DAL\BitcoinTracking.DAL.csproj", "{F9FC4958-B212-4D42-BCFA-609B918C3BBC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitcoinTracking.Shared", "src\BitcoinTracking.Shared\BitcoinTracking.Shared.csproj", "{7E4E8D70-6145-4F73-8969-7F27C0B3C324}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E6118529-243F-40FD-B322-2BFC6796B0FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6118529-243F-40FD-B322-2BFC6796B0FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6118529-243F-40FD-B322-2BFC6796B0FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6118529-243F-40FD-B322-2BFC6796B0FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70B7A56F-7C33-4B4D-BE04-EA84CABB645A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70B7A56F-7C33-4B4D-BE04-EA84CABB645A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70B7A56F-7C33-4B4D-BE04-EA84CABB645A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70B7A56F-7C33-4B4D-BE04-EA84CABB645A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C2A38E9-7F63-40C6-9A54-4E90E516459A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C2A38E9-7F63-40C6-9A54-4E90E516459A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C2A38E9-7F63-40C6-9A54-4E90E516459A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C2A38E9-7F63-40C6-9A54-4E90E516459A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9FC4958-B212-4D42-BCFA-609B918C3BBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9FC4958-B212-4D42-BCFA-609B918C3BBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9FC4958-B212-4D42-BCFA-609B918C3BBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9FC4958-B212-4D42-BCFA-609B918C3BBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E4E8D70-6145-4F73-8969-7F27C0B3C324}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E4E8D70-6145-4F73-8969-7F27C0B3C324}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E4E8D70-6145-4F73-8969-7F27C0B3C324}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E4E8D70-6145-4F73-8969-7F27C0B3C324}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E6118529-243F-40FD-B322-2BFC6796B0FC} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{70B7A56F-7C33-4B4D-BE04-EA84CABB645A} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{0C2A38E9-7F63-40C6-9A54-4E90E516459A} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{F9FC4958-B212-4D42-BCFA-609B918C3BBC} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{7E4E8D70-6145-4F73-8969-7F27C0B3C324} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AEA74127-9F9C-4842-92D6-71ACAE66F351}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,24 @@
+# Auto-detect text files and normalize line endings
+* text=auto
+
+# C#
+*.cs text diff=csharp
+*.csproj text
+*.sln text eol=crlf
+
+# Razor
+*.cshtml text
+*.razor text
+
+# Config & docs
+*.json text
+*.xml text
+*.md text
+*.yml text
+
+# SQL
+*.sql text
+
+# Exclude meta files from release exports
+.gitattributes export-ignore
+.gitignore export-ignore

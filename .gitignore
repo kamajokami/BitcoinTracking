@@ -1,0 +1,102 @@
+## Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.userprefs
+
+## Build Results
+[Dd]ebug/
+[Rr]elease/
+[Bb]in/
+[Oo]bj/
+x64/
+x86/
+[Aa]rm/
+[Aa]rm64/
+bld/
+build/
+
+## .NET / ASP.NET Core
+project.lock.json
+project.fragment.lock.json
+artifacts/
+**/Properties/launchSettings.json
+
+## NuGet Packages
+*.nupkg
+*.snupkg
+**/packages/*
+!**/packages/build/
+*.nuget.props
+*.nuget.targets
+
+## Test Results
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+*.trx
+*.coverage
+*.coveragexml
+TestResults/
+
+## SQL Server Files
+*.mdf
+*.ldf
+*.ndf
+
+## Environment & Secrets
+.env
+.env.local
+.env.*.local
+appsettings.Development.json
+secrets.json
+
+## Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+AppData/Logs/
+**/Logs/
+
+## OS Files
+.DS_Store
+Thumbs.db
+desktop.ini
+ehthumbs.db
+
+## IDE Files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+## Node Modules
+node_modules/
+npm-debug.log
+package-lock.json
+
+## Backup / Temp Files
+*.bak
+*.tmp
+*.orig
+*~
+
+## Specific to BitcoinTracking Project
+# LibMan cache (Bootstrap, jQuery, Chart.js se stáhnou přes libman.json)
+wwwroot/lib/
+
+## Lokální databázové soubory
+*.db
+*.db-shm
+*.db-wal
+
+## Rider (JetBrains IDE)
+.idea/
+*.sln.iml
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
