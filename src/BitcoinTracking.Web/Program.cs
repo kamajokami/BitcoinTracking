@@ -1,5 +1,6 @@
 using Serilog;
 using BitcoinTracking.DAL.Extensions;
+using BitcoinTracking.BAL.Extensions;
 using BitcoinTracking.Shared.Logging;
 
 
@@ -16,7 +17,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddInfrastructure(builder.Configuration);
 
 // TODO: Register Business Logic Layer (BAL) - FÁZE D
-// builder.Services.AddBusinessLogic(builder.Configuration);
+builder.Services.AddBusinessLogic(builder.Configuration);
 
 
 var app = builder.Build();
