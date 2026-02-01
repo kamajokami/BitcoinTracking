@@ -83,14 +83,17 @@ namespace BitcoinTracking.BAL.Services
                 // Read response body as string
                 var jsonString = await response.Content.ReadAsStringAsync();
 
+                // Log format CoinDesk
+                //_logger.LogInformation("CoinDesk API Response: {Response}", jsonString);
+
                 // Parse JSON response
                 var jsonDocument = JsonDocument.Parse(jsonString);
 
                 // Navigate through JSON structure to price value: data.BTC-EUR.price
                 var price = jsonDocument.RootElement
-                    .GetProperty("data")
+                    .GetProperty("Data")
                     .GetProperty("BTC-EUR")
-                    .GetProperty("price")
+                    .GetProperty("PRICE")
                     .GetDecimal();
 
                 _logger.LogInformation("Successfully fetched BTC/EUR price: {Price}", price);
