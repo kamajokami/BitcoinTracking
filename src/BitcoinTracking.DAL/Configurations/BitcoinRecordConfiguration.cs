@@ -44,6 +44,10 @@ namespace BitcoinTracking.DAL.Configurations
                 .HasMaxLength(AppConstants.Validation.MaxNoteLength)
                 .HasDefaultValue(""); // Empty string as default
 
+            // Duplication protection
+            builder.HasIndex(x => x.Note)
+                   .IsUnique();
+
             // Indexes
             builder.HasIndex(b => b.Timestamp)
                 .HasDatabaseName("IX_BitcoinRecords_Timestamp");

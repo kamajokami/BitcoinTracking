@@ -1,8 +1,180 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Domů";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container mt-5">
+    <!-- Hero Section -->
+    <div class="row mb-5">
+        <div class="col-12 text-center">
+            <h1 class="display-3 fw-bold text-primary">
+                <i class="bi bi-currency-bitcoin"></i>
+                Bitcoin Tracking
+            </h1>
+            <p class="lead text-muted mt-3">
+                Profesionální aplikace pro sledování a správu historických dat kurzu Bitcoinu
+            </p>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="row g-4 mb-5">
+        <!-- Live Data Card -->
+        <div class="col-md-6">
+            <div class="card h-100 shadow-sm border-primary">
+                <div class="card-body text-center p-4">
+                    <div class="mb-3">
+                        <i class="bi bi-activity text-primary" style="font-size: 3rem;"></i>
+                    </div>
+                    <h3 class="card-title">Live Data</h3>
+                    <p class="card-text text-muted">
+                        Sledujte aktuální kurz Bitcoinu v reálném čase.
+                        Data jsou získávána z CoinDesk API a přepočítána na CZK pomocí kurzů ČNB.
+                    </p>
+                    <a asp-controller="LiveData" asp-action="Index" class="btn btn-primary btn-lg mt-3">
+                        <i class="bi bi-arrow-right-circle"></i>
+                        Zobrazit aktuální kurz
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Saved Data Card -->
+        <div class="col-md-6">
+            <div class="card h-100 shadow-sm border-success">
+                <div class="card-body text-center p-4">
+                    <div class="mb-3">
+                        <i class="bi bi-save text-success" style="font-size: 3rem;"></i>
+                    </div>
+                    <h3 class="card-title">Uložená Data</h3>
+                    <p class="card-text text-muted">
+                        Spravujte historická data kurzu Bitcoinu.
+                        Filtrování, řazení, úpravy poznámek a vizualizace pomocí interaktivních grafů.
+                    </p>
+                    <a asp-controller="SavedData" asp-action="Index" class="btn btn-success btn-lg mt-3">
+                        <i class="bi bi-arrow-right-circle"></i>
+                        Zobrazit historická data
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Info Section -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="card shadow-sm">
+                <div class="card-header bg-warning text-dark">
+                    <h5 class="mb-0">
+                        <i class="bi bi-info-circle"></i>
+                        Funkcionalita aplikace
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <h6 class="text-primary">
+                                <i class="bi bi-check-circle-fill"></i>
+                                REST API Backend
+                            </h6>
+                            <p class="small text-muted">
+                                Architektura založená na ASP.NET Core Web API s Entity Framework
+                            </p>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <h6 class="text-primary">
+                                <i class="bi bi-check-circle-fill"></i>
+                                Databáze MSSQL
+                            </h6>
+                            <p class="small text-muted">
+                                Perzistence dat v Microsoft SQL Server s Code First přístupem
+                            </p>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <h6 class="text-primary">
+                                <i class="bi bi-check-circle-fill"></i>
+                                Externí API
+                            </h6>
+                            <p class="small text-muted">
+                                Integrace s CoinDesk API a ČNB pro získání kurzů
+                            </p>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <h6 class="text-primary">
+                                <i class="bi bi-check-circle-fill"></i>
+                                Interaktivní grafy
+                            </h6>
+                            <p class="small text-muted">
+                                Vizualizace historického vývoje pomocí Chart.js
+                            </p>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <h6 class="text-primary">
+                                <i class="bi bi-check-circle-fill"></i>
+                                DataTables
+                            </h6>
+                            <p class="small text-muted">
+                                Pokročilé filtrování, řazení a stránkování dat
+                            </p>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <h6 class="text-primary">
+                                <i class="bi bi-check-circle-fill"></i>
+                                Responsive design
+                            </h6>
+                            <p class="small text-muted">
+                                Bootstrap 5 pro perfektní zobrazení na všech zařízeních
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Technology Stack -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="card shadow-sm">
+                <div class="card-header bg-dark text-white">
+                    <h5 class="mb-0">
+                        <i class="bi bi-gear-fill"></i>
+                        Technologický stack
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row text-center">
+                        <div class="col-6 col-md-3 mb-3">
+                            <div class="p-3">
+                                <i class="bi bi-filetype-cs text-primary" style="font-size: 2.5rem;"></i>
+                                <p class="mt-2 mb-0 fw-bold">ASP.NET Core</p>
+                                <small class="text-muted">.NET 8</small>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-3 mb-3">
+                            <div class="p-3">
+                                <i class="bi bi-database-fill text-success" style="font-size: 2.5rem;"></i>
+                                <p class="mt-2 mb-0 fw-bold">MSSQL Server</p>
+                                <small class="text-muted">Entity Framework</small>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-3 mb-3">
+                            <div class="p-3">
+                                <i class="bi bi-bootstrap-fill text-purple" style="font-size: 2.5rem;"></i>
+                                <p class="mt-2 mb-0 fw-bold">Bootstrap 5</p>
+                                <small class="text-muted">Responsive UI</small>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-3 mb-3">
+                            <div class="p-3">
+                                <i class="bi bi-graph-up text-warning" style="font-size: 2.5rem;"></i>
+                                <p class="mt-2 mb-0 fw-bold">Chart.js</p>
+                                <small class="text-muted">Vizualizace</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+

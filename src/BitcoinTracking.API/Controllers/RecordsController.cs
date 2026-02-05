@@ -82,14 +82,46 @@ namespace BitcoinTracking.API.Controllers
         {
             _logger.LogInformation("API: Creating new Bitcoin record");
 
-            var createdRecord = await _recordService.CreateRecordAsync(dto);
+            try
+            {
+                var createdRecord = await _recordService.CreateRecordAsync(dto);
 
-            _logger.LogInformation("API: Created record with ID: {Id}", createdRecord.Id);
+                _logger.LogInformation("API: Created record with ID: {Id}", createdRecord.Id);
 
-            return CreatedAtAction(
-                nameof(GetById),
-                new { id = createdRecord.Id },
-                createdRecord);
+                return CreatedAtAction(
+                    nameof(GetById),
+                    new { id = createdRecord.Id },
+                    createdRecord);
+            }
+            catch (InvalidOperationException ex) 
+            {
+                // BUSINESS PROBLEM (duplicate note)
+                _logger.LogWarning(ex, "API: Business rule violation");
+
+                return BadRequest(new
+                {
+                    error = ex.Message
+                });
+            }
+            catch (ArgumentException ex)
+            {
+                // Validate error DTO
+                _logger.LogWarning(ex, "API: Validation error");
+
+                return BadRequest(new
+                {
+                    error = ex.Message
+                });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "API: Unexpected error while creating record");
+
+                return StatusCode(StatusCodes.Status500InternalServerError, new
+                {
+                    error = "Došlo k neočekávané chybě"
+                });
+            }
         }
 
         /// <summary>

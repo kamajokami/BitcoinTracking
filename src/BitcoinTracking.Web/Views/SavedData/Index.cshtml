@@ -1,0 +1,205 @@
+﻿@{
+	ViewData["Title"] = "Uložená Data - Záznamy";
+}
+
+@Html.AntiForgeryToken()
+
+<div class="container-fluid mt-4">
+	<!-- Page Header -->
+	<div class="row mb-4">
+		<div class="col-12">
+			<h1 class="display-5">
+				<i class="bi bi-save text-primary"></i>
+				Uložená Data
+			</h1>
+			<p class="text-muted">
+				Správa uložených záznamů kurzu Bitcoinu</p>
+		</div>
+	</div>
+
+	<!-- Alerts -->
+	<div id="errorAlert"
+		 class="alert alert-danger alert-dismissible fade show"
+		 role="alert"
+		 style="display: none;">
+		<strong>Chyba!</strong>
+		<span id="errorMessage"></span>
+		<button type="button"
+				class="btn-close"
+				data-bs-dismiss="alert"></button>
+	</div>
+	<div id="successAlert"
+		 class="alert alert-success alert-dismissible fade show"
+		 role="alert"
+		 style="display: none;">
+		<strong>Úspěch!</strong>
+		<span id="successMessage"></span>
+		<button type="button"
+				class="btn-close"
+				data-bs-dismiss="alert"></button>
+	</div>
+
+	<!-- Loading -->
+	<div id="loadingIndicator"
+		 class="text-center my-4"
+		 style="display: none;">
+		<div class="spinner-border text-primary" role="status">
+			<span class="visually-hidden">Zpracování...</span>
+		</div>
+		<p class="mt-2" id="loadingText">Zpracování...</p>
+	</div>
+
+	<!-- GRAF -->
+	<div class="card shadow-sm mb-4">
+		<div class="card-header bg-warning text-dark">
+			<h5 class="mb-0">
+				<i class="bi bi-graph-up"></i>
+				Historický vývoj kurzu
+			</h5>
+		</div>
+		<div class="card-body">
+			<!-- Loading indikátor pro graf -->
+			<div id="chartLoading" class="text-center my-4" style="display: none;">
+				<div class="spinner-border text-warning" role="status">
+					<span class="visually-hidden">Načítání grafu...</span>
+				</div>
+				<p class="mt-2">Načítání grafu...</p>
+			</div>
+
+			<!-- Empty state -->
+			<div id="chartEmpty" class="text-center my-4" style="display: none;">
+				<i class="bi bi-inbox text-muted" style="font-size: 3rem;"></i>
+				<p class="text-muted mt-2">Zatím nejsou k dispozici žádná data pro zobrazení grafu.</p>
+			</div>
+
+			<!-- Error state -->
+			<div id="chartError" class="alert alert-danger" style="display: none;">
+				<i class="bi bi-exclamation-triangle"></i>
+				<strong>Chyba při načítání grafu:</strong>
+				<span class="error-message"></span>
+			</div>
+
+			<!-- Canvas pro graf -->
+			<div style="height: 400px; position: relative;">
+				<canvas id="priceChart"></canvas>
+			</div>
+		</div>
+	</div>
+
+	<!-- Action Buttons -->
+	<div class="row mb-3 align-items-center">
+		<div class="col-md-4">
+			<button id="btnDeleteSelected"
+					class="btn btn-danger"
+					disabled>
+				<i class="bi bi-trash3"></i>
+				Smazat vybrané záznamy
+			</button>
+		</div>
+
+		<div class="col-md-4">
+			<!-- Placeholder for future bulk save / inline edit -->
+			<button id="btnSaveChanges"
+					class="btn btn-success"
+					disabled>
+				<i class="bi bi-floppy2"></i>
+				Uložit změny
+			</button>
+		</div>
+
+		<div class="col-md-4 text-end">
+			<button id="btnRefresh"
+					class="btn btn-outline-primary">
+				<i class="bi bi-arrow-clockwise"></i>
+				Obnovit
+			</button>
+		</div>
+	</div>
+
+	<!-- Records Table -->
+	<div class="card shadow-sm">
+		<div class="card-header bg-primary text-white">
+			<h5 class="mb-0">
+				<i class="bi bi-table"></i>
+				Tabulka uložených záznamů
+			</h5>
+		</div>
+
+		<div class="card-body p-0">
+			<div class="table-responsive">
+				<table id="savedDataTable" class="table table-hover table-striped table-bordered w-100">
+					<thead class="table-light">
+						<tr>
+							<th>
+								<div class="form-check">
+									<input type="checkbox"
+										   id="selectAll"
+										   class="form-check-input" />
+								</div>
+							</th>
+							<th>ID</th>
+							<th>Datum a čas</th>
+							<th>BTC/EUR</th>
+							<th>EUR/CZK</th>
+							<th>BTC/CZK</th>
+							<th>Poznámka</th>
+							<th>Akce</th>
+						</tr>
+					</thead>
+					<tbody>
+					<!-- Loaded dynamically via JavaScript -->
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Confirm Delete Modal -->
+<div class="modal fade"
+	 id="confirmDeleteModal"
+	 tabindex="-1">
+	<div class="modal-dialog">
+		<div class="modal-content">
+
+			<div class="modal-header border-danger">
+				<h5 class="modal-title text-danger">
+					<i class="bi bi-exclamation-triangle"></i>
+					Potvrdit smazání
+				</h5>
+				<button type="button"
+						class="btn-close"
+						data-bs-dismiss="modal"></button>
+			</div>
+
+			<div class="modal-body">
+				<p id="deleteConfirmMessage">
+					Jste si jistí, že chcete smazat vybrané záznamy?
+				</p>
+			</div>
+
+			<div class="modal-footer">
+				<button type="button"
+						class="btn btn-secondary"
+						data-bs-dismiss="modal">
+					Zrušit
+				</button>
+
+				<button type="button"
+						class="btn btn-danger"
+						id="btnConfirmDelete">
+					<i class="bi bi-trash3"></i>
+					Smazat
+				</button>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+@section Scripts {
+	<!-- Chart.js z CDN -->
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+	<script src="~/js/chart.js" asp-append-version="true"></script>
+	<script src="~/js/savedData.js" asp-append-version="true"></script>
+}

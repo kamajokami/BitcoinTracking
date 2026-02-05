@@ -1,0 +1,133 @@
+﻿@{
+    ViewData["Title"] = "Live Data - Aktuální kurz Bitcoinu";
+}
+
+
+
+<!-- ROOT WRAPPER for LiveData page
+	Serves as a single container for JS (liveData.js)
+-->
+<div id="liveDataPage" class="container mt-4">
+    <!--
+            Antiforgery token
+            Used ONLY for AJAX POST (SaveRate)
+            Token is read in liveData.js
+    -->
+    <form id="antiForgeryForm" method="post">
+        @Html.AntiForgeryToken()
+    </form>
+
+    <!-- Page Header -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <h1 class="display-5">
+                <i class="bi bi-activity text-primary"></i>
+                Live Data - Aktuální kurz Bitcoinu
+            </h1>
+            <p class="text-muted">Zobrazení aktuálního kurzu BTC z CoinDesk API a ČNB API</p>
+        </div>
+    </div>
+
+    <!-- Loading Indicator -->
+    <div id="loadingIndicator" class="text-center my-5" style="display: none;">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Načítání...</span>
+        </div>
+        <p class="mt-2">Načítám aktuální kurz...</p>
+    </div>
+
+    <!-- Error Alert -->
+    <div id="errorAlert" class="alert alert-danger alert-dismissible fade show" role="alert" style="display: none;">
+        <strong>Chyba!</strong> 
+        <span id="errorMessage"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+
+    <!-- Success Alert -->
+    <div id="successAlert" class="alert alert-success alert-dismissible fade show" role="alert" style="display: none;">
+        <strong>Úspěch!</strong> 
+        <span id="successMessage"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+
+    <!-- Live Rate Card -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">
+                        <i class="bi bi-currency-bitcoin"></i>
+                        Aktuální kurz Bitcoinu
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <!-- Refresh Button -->
+                    <div class="mb-3">
+                        <button id="btnRefresh" type="button" class="btn btn-outline-primary">
+                            <i class="bi bi-arrow-clockwise"></i>
+                            Obnovit kurz
+                        </button>
+                        <small class="text-muted ms-2">
+                            Naposledy aktualizováno: 
+                            <span id="lastUpdate">-</span>
+                        </small>
+                    </div>
+
+                    <!-- Rate Table -->
+                    <div class="table-responsive">
+                        <table class="table table-hover" id="rateTable">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Čas</th>
+                                    <th>BTC/EUR</th>
+                                    <th>EUR/CZK</th>
+                                    <th>BTC/CZK</th>
+                                    <th>Zdroj</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr id="rateRow" style="display: none;">
+                                    <td id="timestamp">-</td>
+                                    <td id="priceBtcEur">-</td>
+                                    <td id="exchangeRateEurCzk">-</td>
+                                    <td id="priceBtcCzk" class="fw-bold text-primary">-</td>
+                                    <td id="source">-</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Save Form -->
+                    <div id="saveForm" style="display: none;">
+                        <hr />
+                        <h6 class="mb-3">Uložit aktuální kurz do databáze</h6>
+                        <div class="row g-3">
+                            <div class="col-md-8">
+                                <label for="noteInput" class="form-label">
+                                    Poznámka <span class="text-danger">*</span>
+                                </label>
+                                <input type="text"
+                                       class="form-control"
+                                       id="noteInput"
+                                       placeholder="Zadejte poznámku (povinné)"
+                                       maxlength="500"
+                                       required>
+                                <div class="form-text">Max. 500 znaků</div>
+                            </div>
+                            <div class="col-md-4 d-flex align-items-end">
+                                <button id="btnSave" type="button" class="btn btn-success w-100">
+                                    <i class="bi bi-save"></i>
+                                    Uložit data
+                                </button>
+                            </div>
+                        </div>
+                    </div> 
+                </div> <!-- card-body -->
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/liveData.js" asp-append-version="true"></script>
+}

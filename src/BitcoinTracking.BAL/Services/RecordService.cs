@@ -1,9 +1,10 @@
-﻿using Microsoft.Extensions.Logging;
-using BitcoinTracking.BAL.DTOs;
+﻿using BitcoinTracking.BAL.DTOs;
 using BitcoinTracking.BAL.Interfaces.Services;
 using BitcoinTracking.BAL.Validators;
 using BitcoinTracking.DAL.Entities;
 using BitcoinTracking.DAL.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 
 namespace BitcoinTracking.BAL.Services
@@ -117,7 +118,7 @@ namespace BitcoinTracking.BAL.Services
         {
             _logger.LogInformation("Creating new Bitcoin record");
 
-            // Validate DTO
+            // DTO validation (FluentValidation)
             var validator = new CreateRecordDtoValidator();
             var validationResult = await validator.ValidateAsync(dto);
 
@@ -138,12 +139,22 @@ namespace BitcoinTracking.BAL.Services
                 Note = dto.Note
             };
 
-            // Save to database
-            var savedEntity = await _recordRepository.AddAsync(entity);
+            try
+            {
+                // Save to database
+                var savedEntity = await _recordRepository.AddAsync(entity);
 
-            _logger.LogInformation("Created Bitcoin record with ID: {Id}", savedEntity.Id);
+                _logger.LogInformation("Created Bitcoin record with ID: {Id}", savedEntity.Id);
 
-            return MapEntityToDto(savedEntity);
+                return MapEntityToDto(savedEntity);
+            }
+            catch (DbUpdateException ex) when (IsUniqueConstraintViolation(ex)) 
+            {
+                // BUSINESS RULE: Prevent duplicate note
+                _logger.LogWarning("Duplicate note detected: {Note}", dto.Note);
+
+                throw new InvalidOperationException("Záznam s touto poznámkou již existuje.");
+            }
         }
 
 
@@ -241,6 +252,17 @@ namespace BitcoinTracking.BAL.Services
                 PriceBtcCzk = entity.PriceBtcCzk,
                 Note = entity.Note
             };
+        }
+
+        /// <summary>
+        /// BUSINESS RULE: Prevent duplicate note
+        /// </summary>
+        /// <param name="ex"></param>
+        /// <returns></returns>
+        private static bool IsUniqueConstraintViolation(DbUpdateException ex)
+        {
+            return ex.InnerException?.Message.Contains("IX_BitcoinRecords_Note") == true
+                || ex.InnerException?.Message.Contains("UNIQUE") == true;
         }
     }
 }
