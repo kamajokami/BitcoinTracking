@@ -1,3 +1,7 @@
+## =============================================
+## BitcoinTracking Application - .gitignore
+## =============================================
+
 ## Visual Studio
 .vs/
 *.suo
@@ -49,8 +53,11 @@ TestResults/
 .env
 .env.local
 .env.*.local
-appsettings.Development.json
+# ✅ DŮLEŽITÉ: appsettings.Development.json NENÍ ignorován!
+# Obsahuje placeholder connection string pro reviewera.
+# Pro produkci použijte User Secrets nebo Azure Key Vault.
 secrets.json
+appsettings.Production.json
 
 ## Logs
 logs/
@@ -77,7 +84,6 @@ ehthumbs.db
 ## Node Modules
 node_modules/
 npm-debug.log
-package-lock.json
 
 ## Backup / Temp Files
 *.bak
@@ -100,3 +106,6 @@ wwwroot/lib/
 _ReSharper*/
 *.[Rr]e[Ss]harper
 *.DotSettings.user
+
+## Migration temporary files
+**/Migrations/*.Designer.cs.bak
